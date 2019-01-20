@@ -1,0 +1,56 @@
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <base target="_top">
+        <?!= GetCSS('css'); ?>
+    </head>
+    <body>
+        <section id="header">
+           <h2>【今日のごはん占い(web版)】</h2>
+        </section>
+
+        <section id="contents">            
+            <h3>今日のランチ運</h3>
+            <p id="fortune"></p>
+            
+            <h3>＊ 本日のおすすめ店？ ＊</h3>
+            <p id="menu"></p>            
+        <div class="space"></div>
+        <button class="favorite styled" type="button" onclick='doDivine()'>やり直す</button>
+        <div class="space"></div>
+
+        </section>
+        
+        
+        <section id="footer">
+            <a href="https://github.com/bastardeyes/samples/tree/master/src/m5/todays_lunch"　target="_blank">1〜3択のガジェット版(M5Stack)のソースはこちら</a>
+        </section>
+    </body>
+</html>
+
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+<script>
+//reloadでGASのdoGet()が呼ばれないので、カッとして色々妥協して書きました。。
+$(function() {
+　　doDivine()
+});
+
+function doDivine() {
+  
+  var data = JSON.parse(<?= data ?>);
+  var fortunelist =data.fortunelist;
+  var menulist =data.menulist;
+  
+  var num_fortune= Math.floor( Math.random() * fortunelist.length);
+  var fortune=fortunelist[num_fortune];
+  
+  var num_menu= Math.floor( Math.random() * menulist.length);
+  var menu=menulist[num_menu];
+  
+  $("#fortune").text(fortune);
+  $("#menu").text(menu);
+}
+
+</script>
