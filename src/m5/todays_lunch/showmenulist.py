@@ -10,11 +10,13 @@ from jpfont import jpfont
 class ShowMenuList:
     def __init__(self):
         self.fortunelist=["大吉","中吉","小吉","末吉","吉"]
-        self.menulist=["肉","魚","定食","丼","米","中華","和食","洋食","イタリアン","エスニック","麺類","カレー味","ビル出て右","ビル出て左","赤いもの","白いもの","茶色いもの","黄色いもの","温かいもの","女子力高いもの","おっさん飯","居酒屋めし","からいもの","とろみがある","ビル1F","2F以上","ビル地下","ファミレス","スプーンで食う","おばちゃん店員","900円以内"]
+        self.menulist=["肉","魚","定食","丼","米","中華風","和風","洋風","イタリアン","エスニック","麺類","カレー味","ビル出て右","ビル出て左","赤いもの","白いもの","茶色いもの","黄色いもの","温かいもの","女子力高いもの","おっさん飯","居酒屋めし","からいもの","とろみがある","ビル1F","2F以上","ビル地下","ファミレス","スプーンで食う","おばちゃん店員","900円以内"]
         self.challengedict={0:{"方法":"ダイスで決めようぜ!","選択肢":["偶数","奇数"]},
                             1:{"方法":"近くの人とジャンケン","選択肢":["勝ち","負け"]},
                             2:{"方法":"AかつB","選択肢":["A","B"]}}
         self.jpfontObj = jpfont()
+
+        #いらすとや再頒布NGのため、いらすとやで「ご飯」を検索してDLしてください。pngでは表示されません。
         self.backimg="/flash/assets/food_gohan.jpg"
 
         self.i2c = I2C(sda = 21, scl = 22)
@@ -51,7 +53,7 @@ class ShowMenuList:
 
             self.jpfontObj.printString(fortune, 4, 20)
             self.jpfontObj.printString("＊ 本日のおすすめ？ ＊", 4, 40)
-            menu=self.get_menu(correction_val)
+            menu=self.get_menu(correction_val,selected_menues)
             self.jpfontObj.printString(menu, 4, 60)
 
         elif freq==2:
